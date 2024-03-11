@@ -166,5 +166,17 @@ namespace SkyeTimer.Properties {
                 this["btngradtype"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool beeper {
+            get {
+                return ((bool)(this["beeper"]));
+            }
+            set {
+                this["beeper"] = value;
+            }
+        }
     }
 }

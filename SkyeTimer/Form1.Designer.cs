@@ -44,10 +44,18 @@
             setButtonColorAToolStripMenuItem = new ToolStripMenuItem();
             setButtonColorBToolStripMenuItem = new ToolStripMenuItem();
             setGradientTypeToolStripMenuItem1 = new ToolStripMenuItem();
+            toolStripMenuItem3 = new ToolStripSeparator();
+            beepOnFocusToolStripMenuItem = new ToolStripMenuItem();
+            trueToolStripMenuItem = new ToolStripMenuItem();
+            falseToolStripMenuItem = new ToolStripMenuItem();
             toolStripButton1 = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
             toolStripButton3 = new ToolStripButton();
             gradientPanel1 = new GradientPanel();
+            gradientButton8 = new GradientButton();
+            gradientButton7 = new GradientButton();
+            gradientButton6 = new GradientButton();
+            gradientButton5 = new GradientButton();
             gradientButton4 = new GradientButton();
             gradientButton3 = new GradientButton();
             gradientButton2 = new GradientButton();
@@ -82,7 +90,7 @@
             // 
             // toolStripLabel2
             // 
-            toolStripLabel2.DropDownItems.AddRange(new ToolStripItem[] { setTextColorToolStripMenuItem, setFontSizeToolStripMenuItem, setRingColorToolStripMenuItem, setRingProgressColorToolStripMenuItem, toolStripMenuItem1, setBackgroundColorAToolStripMenuItem, setBackgroundColorBToolStripMenuItem, setGradientTypeToolStripMenuItem, toolStripMenuItem2, setButtonColorAToolStripMenuItem, setButtonColorBToolStripMenuItem, setGradientTypeToolStripMenuItem1 });
+            toolStripLabel2.DropDownItems.AddRange(new ToolStripItem[] { setTextColorToolStripMenuItem, setFontSizeToolStripMenuItem, setRingColorToolStripMenuItem, setRingProgressColorToolStripMenuItem, toolStripMenuItem1, setBackgroundColorAToolStripMenuItem, setBackgroundColorBToolStripMenuItem, setGradientTypeToolStripMenuItem, toolStripMenuItem2, setButtonColorAToolStripMenuItem, setButtonColorBToolStripMenuItem, setGradientTypeToolStripMenuItem1, toolStripMenuItem3, beepOnFocusToolStripMenuItem });
             toolStripLabel2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             toolStripLabel2.ForeColor = Color.Teal;
             toolStripLabel2.Image = Properties.Resources.focus;
@@ -170,6 +178,32 @@
             setGradientTypeToolStripMenuItem1.Text = "Set Gradient Type";
             setGradientTypeToolStripMenuItem1.Click += setGradientTypeToolStripMenuItem1_Click;
             // 
+            // toolStripMenuItem3
+            // 
+            toolStripMenuItem3.Name = "toolStripMenuItem3";
+            toolStripMenuItem3.Size = new Size(241, 6);
+            // 
+            // beepOnFocusToolStripMenuItem
+            // 
+            beepOnFocusToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { trueToolStripMenuItem, falseToolStripMenuItem });
+            beepOnFocusToolStripMenuItem.Name = "beepOnFocusToolStripMenuItem";
+            beepOnFocusToolStripMenuItem.Size = new Size(244, 24);
+            beepOnFocusToolStripMenuItem.Text = "Beep on Focus";
+            // 
+            // trueToolStripMenuItem
+            // 
+            trueToolStripMenuItem.Name = "trueToolStripMenuItem";
+            trueToolStripMenuItem.Size = new Size(180, 24);
+            trueToolStripMenuItem.Text = "True";
+            trueToolStripMenuItem.Click += trueToolStripMenuItem_Click;
+            // 
+            // falseToolStripMenuItem
+            // 
+            falseToolStripMenuItem.Name = "falseToolStripMenuItem";
+            falseToolStripMenuItem.Size = new Size(180, 24);
+            falseToolStripMenuItem.Text = "False";
+            falseToolStripMenuItem.Click += falseToolStripMenuItem_Click;
+            // 
             // toolStripButton1
             // 
             toolStripButton1.Alignment = ToolStripItemAlignment.Right;
@@ -217,6 +251,10 @@
             // 
             // gradientPanel1
             // 
+            gradientPanel1.Controls.Add(gradientButton8);
+            gradientPanel1.Controls.Add(gradientButton7);
+            gradientPanel1.Controls.Add(gradientButton6);
+            gradientPanel1.Controls.Add(gradientButton5);
             gradientPanel1.Controls.Add(gradientButton4);
             gradientPanel1.Controls.Add(gradientButton3);
             gradientPanel1.Controls.Add(gradientButton2);
@@ -230,6 +268,78 @@
             gradientPanel1.StartColor = Color.FromArgb(43, 44, 49);
             gradientPanel1.TabIndex = 4;
             gradientPanel1.MouseDown += ToolStrip1_MouseDown;
+            // 
+            // gradientButton8
+            // 
+            gradientButton8.BackColor = Color.Transparent;
+            gradientButton8.EndColor = Color.Black;
+            gradientButton8.FlatAppearance.BorderSize = 0;
+            gradientButton8.FlatStyle = FlatStyle.Flat;
+            gradientButton8.ForeColor = Color.White;
+            gradientButton8.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
+            gradientButton8.Location = new Point(81, 254);
+            gradientButton8.Name = "gradientButton8";
+            gradientButton8.Size = new Size(72, 72);
+            gradientButton8.StartColor = Color.Teal;
+            gradientButton8.TabIndex = 8;
+            gradientButton8.Text = "Quick 10\r\nMin\r\n";
+            gradientButton8.UseCompatibleTextRendering = true;
+            gradientButton8.UseVisualStyleBackColor = false;
+            gradientButton8.Click += gradientButton8_Click;
+            // 
+            // gradientButton7
+            // 
+            gradientButton7.BackColor = Color.Transparent;
+            gradientButton7.EndColor = Color.Black;
+            gradientButton7.FlatAppearance.BorderSize = 0;
+            gradientButton7.FlatStyle = FlatStyle.Flat;
+            gradientButton7.ForeColor = Color.White;
+            gradientButton7.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
+            gradientButton7.Location = new Point(81, 176);
+            gradientButton7.Name = "gradientButton7";
+            gradientButton7.Size = new Size(72, 72);
+            gradientButton7.StartColor = Color.Teal;
+            gradientButton7.TabIndex = 7;
+            gradientButton7.Text = "Quick 5\r\nMin";
+            gradientButton7.UseCompatibleTextRendering = true;
+            gradientButton7.UseVisualStyleBackColor = false;
+            gradientButton7.Click += gradientButton7_Click;
+            // 
+            // gradientButton6
+            // 
+            gradientButton6.BackColor = Color.Transparent;
+            gradientButton6.EndColor = Color.Black;
+            gradientButton6.FlatAppearance.BorderSize = 0;
+            gradientButton6.FlatStyle = FlatStyle.Flat;
+            gradientButton6.ForeColor = Color.White;
+            gradientButton6.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
+            gradientButton6.Location = new Point(81, 98);
+            gradientButton6.Name = "gradientButton6";
+            gradientButton6.Size = new Size(72, 72);
+            gradientButton6.StartColor = Color.Teal;
+            gradientButton6.TabIndex = 6;
+            gradientButton6.Text = "Quick 3\r\nMin";
+            gradientButton6.UseCompatibleTextRendering = true;
+            gradientButton6.UseVisualStyleBackColor = false;
+            gradientButton6.Click += gradientButton6_Click;
+            // 
+            // gradientButton5
+            // 
+            gradientButton5.BackColor = Color.Transparent;
+            gradientButton5.EndColor = Color.Black;
+            gradientButton5.FlatAppearance.BorderSize = 0;
+            gradientButton5.FlatStyle = FlatStyle.Flat;
+            gradientButton5.ForeColor = Color.White;
+            gradientButton5.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
+            gradientButton5.Location = new Point(81, 20);
+            gradientButton5.Name = "gradientButton5";
+            gradientButton5.Size = new Size(72, 72);
+            gradientButton5.StartColor = Color.Teal;
+            gradientButton5.TabIndex = 5;
+            gradientButton5.Text = "Quick 1\r\nMin";
+            gradientButton5.UseCompatibleTextRendering = true;
+            gradientButton5.UseVisualStyleBackColor = false;
+            gradientButton5.Click += gradientButton5_Click;
             // 
             // gradientButton4
             // 
@@ -310,7 +420,7 @@
             circleClockTimer1.EndColor = Color.FromArgb(64, 64, 64);
             circleClockTimer1.ForeColor = Color.Teal;
             circleClockTimer1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            circleClockTimer1.Location = new Point(183, 0);
+            circleClockTimer1.Location = new Point(292, 0);
             circleClockTimer1.Name = "circleClockTimer1";
             circleClockTimer1.PieColor = Color.Yellow;
             circleClockTimer1.Size = new Size(300, 346);
@@ -383,5 +493,13 @@
         private ToolStripMenuItem setFontSizeToolStripMenuItem;
         private ColorDialog colorDialog1;
         private FontDialog fontDialog1;
+        private GradientButton gradientButton8;
+        private GradientButton gradientButton7;
+        private GradientButton gradientButton6;
+        private GradientButton gradientButton5;
+        private ToolStripSeparator toolStripMenuItem3;
+        private ToolStripMenuItem beepOnFocusToolStripMenuItem;
+        private ToolStripMenuItem trueToolStripMenuItem;
+        private ToolStripMenuItem falseToolStripMenuItem;
     }
 }

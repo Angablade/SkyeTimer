@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using System.Drawing.Drawing2D;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -7,11 +8,13 @@ namespace SkyeTimer
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
             toolStrip1.Renderer = new MySR();
-            try { 
+            try
+            {
                 Font savedFont = new Font(Properties.Settings.Default.fontname, Properties.Settings.Default.fontsize, (FontStyle)Properties.Settings.Default.fontstyle);
                 circleClockTimer1.Font = savedFont;
                 circleClockTimer1.TextColor = Color.FromArgb(Properties.Settings.Default.textcolor);
@@ -33,11 +36,19 @@ namespace SkyeTimer
                 gradientButton2.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
                 gradientButton3.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
                 gradientButton4.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
+                gradientButton5.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
+                gradientButton6.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
+                gradientButton7.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
+                gradientButton8.StartColor = Color.FromArgb(Properties.Settings.Default.btncolorA);
 
                 gradientButton1.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
                 gradientButton2.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
                 gradientButton3.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
                 gradientButton4.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
+                gradientButton5.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
+                gradientButton6.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
+                gradientButton7.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
+                gradientButton8.EndColor = Color.FromArgb(Properties.Settings.Default.btncolorB);
 
                 if (Enum.TryParse(Properties.Settings.Default.btngradtype, out LinearGradientMode gradientMode2))
                 {
@@ -45,9 +56,122 @@ namespace SkyeTimer
                     gradientButton2.GradientMode = gradientMode2;
                     gradientButton3.GradientMode = gradientMode2;
                     gradientButton4.GradientMode = gradientMode2;
+                    gradientButton5.GradientMode = gradientMode2;
+                    gradientButton6.GradientMode = gradientMode2;
+                    gradientButton7.GradientMode = gradientMode2;
+                    gradientButton8.GradientMode = gradientMode2;
                 }
             }
             catch (Exception) { }
+            InitializeHotKeyManager();
+        }
+
+        public KeyboardHook KbHook = new KeyboardHook();
+        
+        private void InitializeHotKeyManager()
+        {
+            KbHook.RegisterHotKey(Keys.F9, args => { }, args =>
+            {
+                if (KeyboardHook.IsShiftPressed())
+                {
+                    this.Focus();
+
+                    if (this.WindowState == FormWindowState.Minimized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
+
+                    if (Properties.Settings.Default.beeper)
+                    {
+                        SystemSounds.Beep.Play();
+                    }
+
+                    gradientButton5_Click(this, EventArgs.Empty);
+                }
+            });
+
+
+            KbHook.RegisterHotKey(Keys.F10, args => { }, args =>
+            {
+                if (KeyboardHook.IsShiftPressed())
+                {
+                    this.Focus();
+
+                    if (this.WindowState == FormWindowState.Minimized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
+
+                    if (Properties.Settings.Default.beeper)
+                    {
+                        SystemSounds.Beep.Play();
+                    }
+
+                    gradientButton6_Click(this, EventArgs.Empty);
+                }
+            });
+
+
+            KbHook.RegisterHotKey(Keys.F11, args => { }, args =>
+            {
+                if (KeyboardHook.IsShiftPressed())
+                {
+                    this.Focus();
+
+                    if (this.WindowState == FormWindowState.Minimized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
+
+                    if (Properties.Settings.Default.beeper)
+                    {
+                        SystemSounds.Beep.Play();
+                    }
+
+                    gradientButton7_Click(this, EventArgs.Empty);
+                }
+            });
+
+
+            KbHook.RegisterHotKey(Keys.F12, args => { }, args =>
+            {
+                if (KeyboardHook.IsShiftPressed())
+                {
+                    this.Focus();
+
+                    if (this.WindowState == FormWindowState.Minimized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
+
+                    if (Properties.Settings.Default.beeper)
+                    {
+                        SystemSounds.Beep.Play();
+                    }
+
+                    gradientButton8_Click(this, EventArgs.Empty);
+                }
+            });
+
+            KbHook.RegisterHotKey(Keys.Escape, args => { }, args =>
+            {
+                if (KeyboardHook.IsShiftPressed())
+                {
+                    this.Focus();
+
+                    if (this.WindowState == FormWindowState.Minimized)
+                    {
+                        this.WindowState = FormWindowState.Normal;
+                    }
+
+                    if (Properties.Settings.Default.beeper)
+                    {
+                        SystemSounds.Beep.Play();
+                    }
+
+                    gradientButton2_Click(this, EventArgs.Empty);
+                }
+            });
         }
 
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -75,7 +199,7 @@ namespace SkyeTimer
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            Form1.ActiveForm.WindowState = FormWindowState.Minimized;
+            WindowState = FormWindowState.Minimized;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -118,51 +242,62 @@ namespace SkyeTimer
 
         private void setTextColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try {
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = circleClockTimer1.TextColor;
-            colorDialog1.ShowDialog();
-            circleClockTimer1.TextColor = colorDialog1.Color;
-            Properties.Settings.Default.textcolor = colorDialog1.Color.ToArgb();
-            Properties.Settings.Default.Save();
-            }catch (Exception){}
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = circleClockTimer1.TextColor;
+                colorDialog1.ShowDialog();
+                circleClockTimer1.TextColor = colorDialog1.Color;
+                Properties.Settings.Default.textcolor = colorDialog1.Color.ToArgb();
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception) { }
         }
 
         private void setRingColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = circleClockTimer1.BorderColor;
-            colorDialog1.ShowDialog();
-            circleClockTimer1.BorderColor = colorDialog1.Color;
-            Properties.Settings.Default.ringcolor = colorDialog1.Color.ToArgb();
-            Properties.Settings.Default.Save();
-            }catch (Exception){}
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = circleClockTimer1.BorderColor;
+                colorDialog1.ShowDialog();
+                circleClockTimer1.BorderColor = colorDialog1.Color;
+                Properties.Settings.Default.ringcolor = colorDialog1.Color.ToArgb();
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception) { }
         }
 
         private void setRingProgressColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = circleClockTimer1.PieColor;
-            colorDialog1.ShowDialog();
-            circleClockTimer1.PieColor = colorDialog1.Color;
-            Properties.Settings.Default.ringprogresscolor = colorDialog1.Color.ToArgb();
-            Properties.Settings.Default.Save();
-        }catch (Exception){}
-}
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = circleClockTimer1.PieColor;
+                colorDialog1.ShowDialog();
+                circleClockTimer1.PieColor = colorDialog1.Color;
+                Properties.Settings.Default.ringprogresscolor = colorDialog1.Color.ToArgb();
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception) { }
+        }
 
         private void setButtonColorAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = gradientButton1.StartColor;
-            colorDialog1.ShowDialog();
-            gradientButton1.StartColor = colorDialog1.Color;
-            gradientButton2.StartColor = colorDialog1.Color;
-            gradientButton3.StartColor = colorDialog1.Color;
-            gradientButton4.StartColor = colorDialog1.Color;
-            Properties.Settings.Default.btncolorA = colorDialog1.Color.ToArgb();
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = gradientButton1.StartColor;
+                colorDialog1.ShowDialog();
+                gradientButton1.StartColor = colorDialog1.Color;
+                gradientButton2.StartColor = colorDialog1.Color;
+                gradientButton3.StartColor = colorDialog1.Color;
+                gradientButton4.StartColor = colorDialog1.Color;
+                gradientButton5.StartColor = colorDialog1.Color;
+                gradientButton6.StartColor = colorDialog1.Color;
+                gradientButton7.StartColor = colorDialog1.Color;
+                gradientButton8.StartColor = colorDialog1.Color;
+                Properties.Settings.Default.btncolorA = colorDialog1.Color.ToArgb();
                 Properties.Settings.Default.Save();
             }
             catch (Exception) { }
@@ -170,16 +305,20 @@ namespace SkyeTimer
 
         private void setButtonColorBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = gradientButton1.EndColor;
-            colorDialog1.ShowDialog();
-            gradientButton1.EndColor = colorDialog1.Color;
-            gradientButton2.EndColor = colorDialog1.Color;
-            gradientButton3.EndColor = colorDialog1.Color;
-            gradientButton4.EndColor = colorDialog1.Color;
-            Properties.Settings.Default.btncolorB = colorDialog1.Color.ToArgb();
-            Properties.Settings.Default.Save();
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = gradientButton1.EndColor;
+                colorDialog1.ShowDialog();
+                gradientButton1.EndColor = colorDialog1.Color;
+                gradientButton2.EndColor = colorDialog1.Color;
+                gradientButton3.EndColor = colorDialog1.Color;
+                gradientButton4.EndColor = colorDialog1.Color;
+                gradientButton5.EndColor = colorDialog1.Color;
+                gradientButton6.EndColor = colorDialog1.Color;
+                gradientButton7.EndColor = colorDialog1.Color;
+                gradientButton8.EndColor = colorDialog1.Color;
+                Properties.Settings.Default.btncolorB = colorDialog1.Color.ToArgb();
                 Properties.Settings.Default.Save();
             }
             catch (Exception) { }
@@ -187,15 +326,15 @@ namespace SkyeTimer
 
         private void setFontSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            fontDialog1 = new FontDialog();
-            fontDialog1.Font = circleClockTimer1.Font;
-            fontDialog1.ShowDialog();
-            circleClockTimer1.Font = fontDialog1.Font;
-            Properties.Settings.Default.fontname = fontDialog1.Font.Name;
-            Properties.Settings.Default.fontsize = fontDialog1.Font.Size;
-            Properties.Settings.Default.fontstyle = (int)fontDialog1.Font.Style;
-            Properties.Settings.Default.Save();
+            try
+            {
+                fontDialog1 = new FontDialog();
+                fontDialog1.Font = circleClockTimer1.Font;
+                fontDialog1.ShowDialog();
+                circleClockTimer1.Font = fontDialog1.Font;
+                Properties.Settings.Default.fontname = fontDialog1.Font.Name;
+                Properties.Settings.Default.fontsize = fontDialog1.Font.Size;
+                Properties.Settings.Default.fontstyle = (int)fontDialog1.Font.Style;
                 Properties.Settings.Default.Save();
             }
             catch (Exception) { }
@@ -212,20 +351,26 @@ namespace SkyeTimer
                     gradientButton2.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
                     gradientButton3.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
                     gradientButton4.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
+                    gradientButton5.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
+                    gradientButton6.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
+                    gradientButton7.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
+                    gradientButton8.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
                     Properties.Settings.Default.btngradtype = selectedGradient.ToString();
+                    Properties.Settings.Default.Save();
                 }
             }
         }
 
         private void setBackgroundColorAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = gradientPanel1.StartColor;
-            colorDialog1.ShowDialog();
-            gradientPanel1.StartColor = colorDialog1.Color;
-            circleClockTimer1.StartColor = colorDialog1.Color;
-            Properties.Settings.Default.bgcolorA = colorDialog1.Color.ToArgb();
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = gradientPanel1.StartColor;
+                colorDialog1.ShowDialog();
+                gradientPanel1.StartColor = colorDialog1.Color;
+                circleClockTimer1.StartColor = colorDialog1.Color;
+                Properties.Settings.Default.bgcolorA = colorDialog1.Color.ToArgb();
                 Properties.Settings.Default.Save();
             }
             catch (Exception) { }
@@ -233,13 +378,14 @@ namespace SkyeTimer
 
         private void setBackgroundColorBToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try { 
-            colorDialog1 = new ColorDialog();
-            colorDialog1.Color = gradientPanel1.EndColor;
-            colorDialog1.ShowDialog();
-            gradientPanel1.EndColor = colorDialog1.Color;
-            circleClockTimer1.EndColor = colorDialog1.Color;
-            Properties.Settings.Default.bgcolorB = colorDialog1.Color.ToArgb();
+            try
+            {
+                colorDialog1 = new ColorDialog();
+                colorDialog1.Color = gradientPanel1.EndColor;
+                colorDialog1.ShowDialog();
+                gradientPanel1.EndColor = colorDialog1.Color;
+                circleClockTimer1.EndColor = colorDialog1.Color;
+                Properties.Settings.Default.bgcolorB = colorDialog1.Color.ToArgb();
                 Properties.Settings.Default.Save();
             }
             catch (Exception) { }
@@ -255,8 +401,48 @@ namespace SkyeTimer
                     gradientPanel1.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
                     circleClockTimer1.GradientMode = (System.Drawing.Drawing2D.LinearGradientMode)selectedGradient;
                     Properties.Settings.Default.bggradtype = selectedGradient.ToString();
+                    Properties.Settings.Default.Save();
                 }
             }
+        }
+
+        private void gradientButton5_Click(object sender, EventArgs e)
+        {
+            circleClockTimer1.TimeLimitInMinutes = 1;
+            circleClockTimer1.Reset();
+            circleClockTimer1.Start();
+        }
+
+        private void gradientButton6_Click(object sender, EventArgs e)
+        {
+            circleClockTimer1.TimeLimitInMinutes = 3;
+            circleClockTimer1.Reset();
+            circleClockTimer1.Start();
+        }
+
+        private void gradientButton7_Click(object sender, EventArgs e)
+        {
+            circleClockTimer1.TimeLimitInMinutes = 5;
+            circleClockTimer1.Reset();
+            circleClockTimer1.Start();
+        }
+
+        private void gradientButton8_Click(object sender, EventArgs e)
+        {
+            circleClockTimer1.TimeLimitInMinutes = 10;
+            circleClockTimer1.Reset();
+            circleClockTimer1.Start();
+        }
+        private void trueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.beeper = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void falseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           Properties.Settings.Default.beeper = false; 
+           Properties.Settings.Default.Save();
         }
     }
 }

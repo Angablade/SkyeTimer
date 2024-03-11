@@ -310,10 +310,10 @@
             circleClockTimer1.EndColor = Color.FromArgb(64, 64, 64);
             circleClockTimer1.ForeColor = Color.Teal;
             circleClockTimer1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-            circleClockTimer1.Location = new Point(183, 23);
+            circleClockTimer1.Location = new Point(183, 0);
             circleClockTimer1.Name = "circleClockTimer1";
             circleClockTimer1.PieColor = Color.Yellow;
-            circleClockTimer1.Size = new Size(300, 300);
+            circleClockTimer1.Size = new Size(300, 346);
             circleClockTimer1.StartColor = Color.FromArgb(43, 44, 49);
             circleClockTimer1.TabIndex = 0;
             circleClockTimer1.Text = "circleClockTimer1";
